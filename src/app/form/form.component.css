@@ -1,0 +1,17 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+
+}
+
+.title {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.date {
+  margin-bottom: 10px;
+}

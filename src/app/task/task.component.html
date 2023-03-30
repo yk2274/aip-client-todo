@@ -1,0 +1,15 @@
+<mat-card class="mat-card" *ngFor="let task of tasks">
+    <mat-card-header>
+        <mat-card-title>
+            <mat-checkbox></mat-checkbox>
+            {{task.title}}
+            <h5>{{task.category}}</h5>
+        </mat-card-title>
+        <mat-card-subtitle>Due date: {{task.dueDate}}</mat-card-subtitle>
+        <mat-card-subtitle>{{task.description}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-actions align="end">
+        <button mat-button (click)="openEditDialog(task)">EDIT</button>
+        <button mat-button (click)="openDeleteDialog(task)">DELETE</button>
+    </mat-card-actions>
+</mat-card>

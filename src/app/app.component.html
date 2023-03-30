@@ -1,0 +1,24 @@
+<div class="div">
+  <h2>To Do List</h2>
+  <button class="button" mat-icon-button color="primary" (click)="openDialog()">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+<app-task></app-task>
+<ng-template #allDone>
+  <h4>All Done!!</h4>
+</ng-template>
+
+<h2>Completed 🎉</h2>
+<mat-card class="mat-card">
+  <mat-card-header>
+    <!-- to do content -->
+    <mat-card-title>Actions Buttons</mat-card-title>
+    <mat-card-subtitle>End</mat-card-subtitle>
+    <!-- to do content -->
+  </mat-card-header>
+  <mat-card-actions align="end">
+    <button mat-button>LIKE</button>
+    <button mat-button>SHARE</button>
+  </mat-card-actions>
+</mat-card>

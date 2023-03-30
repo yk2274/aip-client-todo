@@ -1,0 +1,23 @@
+mat-card-title > *:last-child {
+    margin-left: 0.5rem;
+}
+
+mat-card-subtitle {
+    margin-left: 10px;
+}
+
+mat-card {
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+h5 {
+    padding-left: 4px;
+    padding-right: 4px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    display: inline;
+    background-color: rgb(184, 123, 184);
+    color: white;
+}
