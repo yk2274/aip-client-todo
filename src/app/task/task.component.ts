@@ -11,40 +11,54 @@ import { TaskService } from '../service/task.service';
   styleUrls: ['./task.component.css']
 })
 export class TaskComponent implements OnInit {
-  
-  //get this data to database data
+
   tasks: Task[] = []
+  completeTask: Map<number, boolean> = new Map([]);
 
   constructor(
     private dialog: MatDialog,
     private taskService: TaskService
   ) { }
 
+
   ngOnInit(): void {
     this.loadTask()
-    this.dialog.afterAllClosed.subscribe(() => this.loadTask())  
   }
 
   loadTask() {
     this.taskService.getTasks()
-    .subscribe(tasks => {
-      this.tasks = tasks
+      .subscribe(tasks => {
+        this.tasks = tasks
+        tasks.forEach((task) => {
+          this.completeTask.set(task.id, false);
+        })
+      })
+  }
+
+  checkedTask(taskId: number) {
+    this.completeTask.set(taskId, !this.completeTask.get(taskId));
+  }
+
+  openAddDialog() {
+    const dialogRef = this.dialog.open(FormComponent, { 
+      width: '500px' 
     })
+    dialogRef.afterClosed().subscribe(() => this.loadTask())
   }
 
   openEditDialog(task: Task) {
-    const dialogRef = this.dialog.open(FormComponent, { 
-      width:'500px',
+    const dialogRef = this.dialog.open(FormComponent, {
+      width: '500px',
       data: task
     })
-    dialogRef.afterClosed().subscribe()
+    dialogRef.afterClosed().subscribe(() => this.loadTask())
   }
 
   openDeleteDialog(task: Task) {
     const dialogRef = this.dialog.open(DeleteComponent)
-    dialogRef.afterClosed().subscribe(result => {           
+    dialogRef.afterClosed().subscribe(result => {
       if (result == true) {
-        console.log(result);
+        this.taskService.deleteTask(task.id).subscribe(() => this.loadTask())
       }
     })
   }

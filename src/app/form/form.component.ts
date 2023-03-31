@@ -9,7 +9,7 @@ import { TaskService } from '../service/task.service';
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.css']
 })
-export class FormComponent implements OnInit {
+export class FormComponent {
   constructor(
     public dialogRef: MatDialogRef<FormComponent>,
     @Inject(MAT_DIALOG_DATA) public task: Task,
@@ -26,9 +26,6 @@ export class FormComponent implements OnInit {
     description: new FormControl(this.task?.description),
   })
 
-  ngOnInit(): void {
-    this.formData.valueChanges.subscribe((value) => console.log(value))
-  }
   getErrorMessage() {
     return 'You must enter a value';
   }

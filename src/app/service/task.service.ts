@@ -4,7 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 import { Task, TaskRequest } from '../interface/task';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class TaskService {
   private readonly api = 'http://localhost:8080/api/tasks';
   httpOptions = {
@@ -14,17 +14,17 @@ export class TaskService {
   constructor(private http: HttpClient) { }
 
   getTasks(): Observable<Task[]> {
-    return this.http.get<Task[]>(this.api).pipe(
-      tap(tasks => console.log(tasks)),
-      catchError(this.handleError)
-    )
+    return this.http.get<Task[]>(this.api)
+      .pipe(
+        catchError(this.handleError)
+      )
   }
 
   addTask(task: TaskRequest): Observable<Task> {
-    return this.http.post<Task>(this.api, task, this.httpOptions).pipe(
-      tap((newTask: Task) => console.log(newTask)),
-      catchError(this.handleError)
-    );
+    return this.http.post<Task>(this.api, task, this.httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
   updateTask(task: TaskRequest, taskId: number): Observable<Task> {
@@ -33,7 +33,14 @@ export class TaskService {
         catchError(this.handleError)
       );
   }
-   
+
+  deleteTask(taskId: number): Observable<Task> {
+    return this.http.delete<Task>(`${this.api}?taskId=${taskId}`, this.httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
   private handleError(error: HttpErrorResponse): Observable<never> {
     console.log(error);
     return throwError(() => new Error(`Error status: ${error.status}, Error message: ${error.message}`))

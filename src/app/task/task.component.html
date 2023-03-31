@@ -1,15 +1,25 @@
+<div class="div">
+    <h2>To Do List</h2>
+    <button class="button" mat-icon-button color="primary" (click)="openAddDialog()">
+        <mat-icon>add</mat-icon>
+    </button>
+</div>
 <mat-card class="mat-card" *ngFor="let task of tasks">
     <mat-card-header>
         <mat-card-title>
-            <mat-checkbox></mat-checkbox>
-            {{task.title}}
-            <h5>{{task.category}}</h5>
+            <mat-checkbox [ngModel]="completeTask.get(task.id)" (change)="checkedTask(task.id)"></mat-checkbox>
+            <span [ngClass]="{'complete' : completeTask.get(task.id)}">{{task.title}}</span>
+            <h5 [ngClass]="{'complete' : completeTask.get(task.id)}">{{task.category}}</h5>
         </mat-card-title>
-        <mat-card-subtitle>Due date: {{task.dueDate}}</mat-card-subtitle>
-        <mat-card-subtitle>{{task.description}}</mat-card-subtitle>
+        <mat-card-subtitle [ngClass]="{'complete' : completeTask.get(task.id)}">Due date:
+            {{task.dueDate}}</mat-card-subtitle>
+        <mat-card-subtitle [ngClass]="{'complete' : completeTask.get(task.id)}">{{task.description}}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-actions align="end">
         <button mat-button (click)="openEditDialog(task)">EDIT</button>
         <button mat-button (click)="openDeleteDialog(task)">DELETE</button>
     </mat-card-actions>
 </mat-card>
+<ng-template #allDone>
+    <h4>All Done 🎉</h4>
+</ng-template>
