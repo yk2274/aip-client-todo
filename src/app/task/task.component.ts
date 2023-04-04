@@ -4,6 +4,7 @@ import { DeleteComponent } from '../delete/delete.component';
 import { FormComponent } from '../form/form.component';
 import { Task } from '../interface/task';
 import { TaskService } from '../service/task.service';
+import { AuthService } from '../service/auth.service';
 
 @Component({
   selector: 'app-task',
@@ -17,7 +18,8 @@ export class TaskComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog,
-    private taskService: TaskService
+    private taskService: TaskService,
+    private authService: AuthService
   ) { }
 
 
@@ -61,5 +63,9 @@ export class TaskComponent implements OnInit {
         this.taskService.deleteTask(task.id).subscribe(() => this.loadTask())
       }
     })
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }

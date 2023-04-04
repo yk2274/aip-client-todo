@@ -38,6 +38,13 @@ h5 {
     align-items: center;
 }
 
-.button {
+
+button.button-add {
+    color: #B87BB8;
     margin-right: 15px;
+}
+
+button.button-logout {
+    color: white;
+    background-color: #B87BB8;
 }

@@ -16,18 +16,21 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { TaskComponent } from './task/task.component';
 import { FormComponent } from './form/form.component';
 import { DeleteComponent } from './delete/delete.component';
+import { LoginComponent } from './login/login.component';
+import { AuthInterceptor } from './interceptor/auth.interceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
     TaskComponent,
     FormComponent,
-    DeleteComponent
+    DeleteComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +50,11 @@ import { DeleteComponent } from './delete/delete.component';
     ReactiveFormsModule,
     MatDatepickerModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
