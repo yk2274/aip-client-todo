@@ -6,7 +6,6 @@ export interface Task {
     dueDate: string,
     dateCreated: string,
     dateModified: string,
-    isDelete: boolean
 }
 
 export interface TaskRequest {

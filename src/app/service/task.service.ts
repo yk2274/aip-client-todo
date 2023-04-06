@@ -6,7 +6,7 @@ import { Task, TaskRequest } from '../interface/task';
 
 @Injectable({ providedIn: 'root' })
 export class TaskService {
-  private readonly api = 'http://localhost:8080/api/tasks';
+  private readonly api = 'http://localhost:8080/tasks';
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   }
