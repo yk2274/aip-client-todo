@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { DeleteComponent } from '../delete/delete.component';
-import { FormComponent } from '../form/form.component';
-import { Task } from '../interface/task';
-import { TaskService } from '../service/task.service';
-import { AuthService } from '../service/auth.service';
+import { DeleteComponent } from '../dialog/delete/delete.component';
+import { FormComponent } from '../dialog/form/form.component';
+import { Task } from '../../interface/task';
+import { TaskService } from '../../service/task.service';
+import { AuthService } from '../../service/auth.service';
 
 @Component({
   selector: 'app-task',

@@ -9,14 +9,11 @@ import * as moment from 'moment';
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private readonly api = 'http://localhost:8080/auth';
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  }
 
   constructor(private http: HttpClient, public router: Router) { }
 
   authenticate(loginDetails: Auth): Observable<Auth> {
-    return this.http.post<Auth>(this.api, loginDetails, this.httpOptions)
+    return this.http.post<Auth>(this.api, loginDetails)
       .pipe(
         tap((res: any) => {
           const expiresAt = moment().add(res.expiresIn, 'second');
@@ -29,6 +26,10 @@ export class AuthService {
 
   getToken() {
     return localStorage.getItem('jwt_token');
+  }
+
+  isAuthenticated() {
+    return localStorage.getItem('jwt_token') !== null ? true : false
   }
 
   logout() {

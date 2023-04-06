@@ -1,8 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Task, TaskRequest } from '../interface/task';
-import { TaskService } from '../service/task.service';
+import { Task, TaskRequest } from '../../../interface/task';
+import { TaskService } from '../../../service/task.service';
 
 @Component({
   selector: 'app-form',
@@ -17,18 +17,14 @@ export class FormComponent {
   ) { }
 
   formData = new FormGroup({
-    title: new FormControl(this.task?.title, [Validators.required]),
+    title: new FormControl(this.task?.title, [Validators.required, Validators.maxLength(250)]),
 
-    category: new FormControl(this.task?.category, [Validators.required]),
+    category: new FormControl(this.task?.category, [Validators.required, Validators.maxLength(2000)]),
 
     dueDate: new FormControl(this.task?.dueDate, [Validators.required]),
 
-    description: new FormControl(this.task?.description),
+    description: new FormControl(this.task?.description, Validators.maxLength(2000)),
   })
-
-  getErrorMessage() {
-    return 'You must enter a value';
-  }
 
   closeDialog() {
     this.dialogRef.close();
@@ -51,3 +47,4 @@ export class FormComponent {
     }
   }
 }
+
