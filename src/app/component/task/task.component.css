@@ -7,18 +7,13 @@ mat-card-subtitle {
 }
 
 mat-card {
-    margin-top: 20px;
-    margin-left: 20px;
-    margin-right: 20px;
+    margin: 20px 20px 0px 20px
 }
 
 h5 {
-    padding-left: 4px;
-    padding-right: 4px;
-    padding-top: 2px;
-    padding-bottom: 2px;
+    padding: 2px 4px 2px 4px;
     display: inline;
-    background-color: rgb(184, 123, 184);
+    background-color: #B87BB8;
     color: white;
 }
 
@@ -27,9 +22,7 @@ h5 {
 }
 
 .mat-card, h2 {
-    margin-top: 20px;
-    margin-left: 20px;
-    margin-right: 20px;
+    margin: 20px 20px 0px 20px
 }
 
 .div {

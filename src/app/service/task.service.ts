@@ -7,9 +7,6 @@ import { Task, TaskRequest } from '../interface/task';
 @Injectable({ providedIn: 'root' })
 export class TaskService {
   private readonly api = 'http://localhost:8080/tasks';
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  }
 
   constructor(private http: HttpClient) { }
 
@@ -21,21 +18,21 @@ export class TaskService {
   }
 
   addTask(task: TaskRequest): Observable<Task> {
-    return this.http.post<Task>(this.api, task, this.httpOptions)
+    return this.http.post<Task>(this.api, task)
       .pipe(
         catchError(this.handleError)
       );
   }
 
   updateTask(task: TaskRequest, taskId: number): Observable<Task> {
-    return this.http.put<Task>(`${this.api}?taskId=${taskId}`, task, this.httpOptions)
+    return this.http.put<Task>(`${this.api}?taskId=${taskId}`, task)
       .pipe(
         catchError(this.handleError)
       );
   }
 
   deleteTask(taskId: number): Observable<Task> {
-    return this.http.delete<Task>(`${this.api}?taskId=${taskId}`, this.httpOptions)
+    return this.http.delete<Task>(`${this.api}?taskId=${taskId}`)
       .pipe(
         catchError(this.handleError)
       );

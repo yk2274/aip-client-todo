@@ -1,5 +1,5 @@
 <div>
-    <h1><b>TO DO APP</b></h1>
+    <h1><b>SIGN IN</b></h1>
     <mat-card>
         <form class="content" [formGroup]="formData">
             <mat-form-field class="input-username">
@@ -12,7 +12,9 @@
             </mat-form-field>
         </form>
         <mat-card-actions align="end">
-            <button mat-button class="button-login" (click)="onSubmit()">LOGIN</button>
+            <ng-template [ngIf]="formData.valid">
+                <button mat-button class="button-login" (click)="onSubmit()">LOGIN</button>
+            </ng-template>
         </mat-card-actions>
     </mat-card>
 </div>
