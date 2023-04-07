@@ -7,11 +7,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { RequestInterceptor } from './interceptor/request.interceptor';
-import { MatDesignModule } from './mat-design.module';
+import { MatDesignModule } from './component/component.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,

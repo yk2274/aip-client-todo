@@ -8,10 +8,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
-import { LoginComponent } from './component/login/login.component';
-import { DeleteComponent } from './component/dialog/delete/delete.component';
-import { FormComponent } from './component/dialog/form/form.component';
-import { TaskComponent } from './component/task/task.component';
+import { LoginComponent } from './login/login.component';
+import { DeleteComponent } from './dialog/delete/delete.component';
+import { FormComponent } from './dialog/form/form.component';
+import { TaskComponent } from './task/task.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -19,12 +19,12 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 
 
 @NgModule({
-  declarations: [
+  declarations: [     
     LoginComponent,
     TaskComponent,
     DeleteComponent,
-    FormComponent
-   ],
+    FormComponent 
+  ],
 
   exports: [
     LoginComponent,
