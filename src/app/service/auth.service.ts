@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 import { Auth } from '../interface/auth';
 import { Router } from '@angular/router';
+import { Token } from '../interface/token';
+import jwt_decode from "jwt-decode";
 import * as moment from 'moment';
 
 @Injectable({ providedIn: 'root' })
@@ -24,15 +26,27 @@ export class AuthService {
       )
   }
 
-  getToken() {
-    return localStorage.getItem('jwt_token');
+  decode(token: string): Token {
+    return jwt_decode(token);
   }
 
-  isAuthenticated() {
+  isAuthenticated(): boolean {
     return localStorage.getItem('jwt_token') !== null ? true : false
   }
 
-  logout() {
+  getUsername(): string {
+     const token = localStorage.getItem('jwt_token')
+     const decodedToken = this.decode(token as string)
+     return decodedToken.sub;
+  }
+
+  getRoles(): string[] {
+    const token = localStorage.getItem('jwt_token')
+    const decodedToken = this.decode(token as string)
+    return decodedToken.roles;
+  }
+
+  logout(): void {
     localStorage.clear();
     this.router.navigateByUrl('/')
   }

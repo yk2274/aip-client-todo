@@ -18,7 +18,22 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    
-    return this.authService.isAuthenticated() ? true : this.router.parseUrl('/auth');
+      
+    let url: string = state.url;
+    return this.checkUserLogin(route, url)
+  }
+
+  checkUserLogin(route: ActivatedRouteSnapshot, url: any): boolean {
+    if (this.authService.isAuthenticated()) {
+      const roles = this.authService.getRoles();
+      
+      if (route.data['role'] && roles.indexOf(route.data['role']) === -1) { 
+        this.router.navigate(['/task']);
+        return false
+      }
+      return true
+    }
+    this.router.navigate(['/auth']);
+    return false;
   }
 }

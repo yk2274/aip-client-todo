@@ -1,8 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Task, TaskRequest } from '../../../interface/task';
-import { TaskService } from '../../../service/task.service';
+import { Task, TaskRequest } from '../../../../interface/task';
+import { TaskService } from '../../../../service/task.service';
 
 @Component({
   selector: 'app-form',

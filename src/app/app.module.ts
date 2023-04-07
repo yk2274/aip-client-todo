@@ -8,10 +8,12 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { RequestInterceptor } from './interceptor/request.interceptor';
 import { MatDesignModule } from './component/component.module';
+import { AdminComponent } from './component/admin/admin/admin.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,

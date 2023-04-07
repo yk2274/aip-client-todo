@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteComponent } from '../dialog/delete/delete.component';
 import { FormComponent } from '../dialog/form/form.component';
-import { Task } from '../../interface/task';
-import { TaskService } from '../../service/task.service';
-import { AuthService } from '../../service/auth.service';
+import { Task } from '../../../interface/task';
+import { TaskService } from '../../../service/task.service';
+import { AuthService } from '../../../service/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-task',
@@ -15,11 +16,13 @@ export class TaskComponent implements OnInit {
 
   tasks: Task[] = []
   completeTask: Map<number, boolean> = new Map([]);
-
+  roles: String[] = this.authService.getRoles();
+  
   constructor(
     private dialog: MatDialog,
     private taskService: TaskService,
-    private authService: AuthService
+    private authService: AuthService,
+    public router: Router
   ) { }
 
 
@@ -27,7 +30,7 @@ export class TaskComponent implements OnInit {
     this.loadTask()
   }
 
-  loadTask() {
+  loadTask(): void {
     this.taskService.getTasks()
       .subscribe(tasks => {
         this.tasks = tasks
@@ -37,18 +40,18 @@ export class TaskComponent implements OnInit {
       })
   }
 
-  checkedTask(taskId: number) {
+  checkedTask(taskId: number): void {
     this.completeTask.set(taskId, !this.completeTask.get(taskId));
   }
 
-  openAddDialog() {
+  openAddDialog(): void {
     const dialogRef = this.dialog.open(FormComponent, { 
       width: '500px' 
     })
     dialogRef.afterClosed().subscribe(() => this.loadTask())
   }
 
-  openEditDialog(task: Task) {
+  openEditDialog(task: Task): void {
     const dialogRef = this.dialog.open(FormComponent, {
       width: '500px',
       data: task
@@ -56,7 +59,7 @@ export class TaskComponent implements OnInit {
     dialogRef.afterClosed().subscribe(() => this.loadTask())
   }
 
-  openDeleteDialog(task: Task) {
+  openDeleteDialog(task: Task): void {
     const dialogRef = this.dialog.open(DeleteComponent)
     dialogRef.afterClosed().subscribe(result => {
       if (result == true) {
@@ -65,7 +68,15 @@ export class TaskComponent implements OnInit {
     })
   }
 
-  logout() {
+  hasAdminRole(): boolean {    
+    return this.roles.indexOf("ROLE_ADMIN") !== -1 
+  }
+
+  navigateToDashboard(): void {
+    this.router.navigate(['/admin'])
+  }
+
+  logout(): void {
     this.authService.logout();
   }
 }
